@@ -9,7 +9,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import javax.crypto.Mac;
@@ -26,19 +25,18 @@ public class CryptoUtils {
 
     public static String hashBySegments(String key, String apiKey, String time, String nonce, String method, String encodedPath, String query, String bodyStr) {
 
-        List<byte []> segments = Arrays.asList(
-            apiKey.getBytes(ISO_8859_1),
-            time.getBytes(ISO_8859_1),
-            nonce.getBytes(ISO_8859_1),
-            null,  // unused field
-            null,  // unused field
-            null,  // unused field
-            method.getBytes(ISO_8859_1),
-            encodedPath == null ? null : encodedPath.getBytes(ISO_8859_1),
-            query == null ? null : query.getBytes(ISO_8859_1));
+        List<byte []> segments = new ArrayList<>();
+        segments.add(apiKey.getBytes(ISO_8859_1));
+        segments.add(time.getBytes(ISO_8859_1));
+        segments.add(nonce.getBytes(ISO_8859_1));
+        segments.add(null);  // unused field
+        segments.add(null);  // unused field
+        segments.add(null);  // unused field
+        segments.add(method.getBytes(ISO_8859_1));
+        segments.add(encodedPath == null ? null : encodedPath.getBytes(ISO_8859_1));
+        segments.add(query == null ? null : query.getBytes(ISO_8859_1));
 
         if (bodyStr != null && bodyStr.length() > 0) {
-            segments = new ArrayList<>(segments);
             segments.add(bodyStr.getBytes(UTF_8));
         }
 
