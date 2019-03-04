@@ -1,4 +1,4 @@
-package com.nicehash.clients.util.cli;
+package com.nicehash.clients.common.util;
 
 import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -45,7 +46,6 @@ public class CryptoUtils {
 
     private static String hmacSha256BySegments(String key, List<byte []> segments) {
         try {
-            //ByteArrayOutputStream baos = new ByteArrayOutputStream();
             Mac mac = Mac.getInstance(HMAC_SHA256);
             SecretKeySpec secret_key = new SecretKeySpec(key.getBytes(UTF_8), HMAC_SHA256);
             mac.init(secret_key);
@@ -63,7 +63,22 @@ public class CryptoUtils {
                 }
             }
 
-            //log.info("Hash input: [{}]", baos.toString(ISO_8859_1.name()));
+            if (log.isDebugEnabled()) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                first = true;
+                for (byte [] segment: segments) {
+                    if (!first) {
+                        baos.write((byte) 0);
+                    } else {
+                        first = false;
+                    }
+                    if (segment != null) {
+                        baos.write(segment);
+                    }
+                }
+                log.debug("Hash input: [{}]", baos.toString(ISO_8859_1.name()));
+            }
+
             return Hex.encodeHexString(mac.doFinal());
         } catch (Exception e) {
             throw new RuntimeException("Cannot create HmacSHA256", e);

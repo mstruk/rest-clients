@@ -25,6 +25,10 @@
     </dependency>
     <dependency>
       <groupId>com.nicehash</groupId>
+      <artifactId>clients-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.nicehash</groupId>
       <artifactId>clients-util</artifactId>
     </dependency>
   </dependencies>

@@ -4,7 +4,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.nicehash.clients.util.cli.CryptoUtils.hashBySegments;
+import static com.nicehash.clients.common.util.CryptoUtils.hashBySegments;
 
 import java.io.IOException;
 import java.util.UUID;

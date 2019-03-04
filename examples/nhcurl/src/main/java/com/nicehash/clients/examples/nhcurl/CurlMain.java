@@ -2,8 +2,8 @@ package com.nicehash.clients.examples.nhcurl;
 
 import com.nicehash.clients.util.cli.CliUtils;
 
-import static com.nicehash.clients.util.cli.CryptoUtils.generateWsKey;
-import static com.nicehash.clients.util.cli.CryptoUtils.hashBySegments;
+import static com.nicehash.clients.common.util.CryptoUtils.generateWsKey;
+import static com.nicehash.clients.common.util.CryptoUtils.hashBySegments;
 import static com.nicehash.clients.util.cli.IoUtils.copyBytes;
 
 import java.io.UnsupportedEncodingException;
