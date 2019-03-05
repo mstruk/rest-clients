@@ -95,4 +95,9 @@ public class Options {
      * Secret
      */
     public static final Option<String> SECRET = Option.simple(Options.class, "SECRET", String.class, true);
+
+    /**
+     * Optional client name - used in debug logging to differentiate between different clients for example
+     */
+    public static final Option<String> NAME = Option.simple(Options.class, "NAME", String.class, false);
 }
